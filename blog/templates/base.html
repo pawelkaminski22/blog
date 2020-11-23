@@ -41,16 +41,20 @@
      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
      <span class="navbar-toggler-icon"></span>
    </button>
-
+<a class="nav-link" href="{{ url_for('list_drafts') }}">Szkice</a>
 <a class="nav-link" href="{{ url_for('create_entry') }}">Dodaj wpis</a>
-   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
      <ul class="navbar-nav mr-auto">
      </ul>
-     <form class="form-inline my-2 my-lg-0">
-       <input class="form-control mr-sm-2" type="text" placeholder="Szukaj" aria-label="Szukaj">
-       <button class="btn btn-secondary my-2 my-sm-0" type="submit">Szukaj</button>
-     </form>
+     {% if session.logged_in %}
+       <form class="form-inline my-2 my-lg-0" action="{{ url_for('logout') }}" method="POST">
+         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Wyloguj</button>
+       </form>
+     {% else %}
+       <a href="{{ url_for('login') }}" class="btn btn-secondary my-2 my-lg-0">Zaloguj</a>
+     {% endif %}
    </div>
+
  </nav>
 
  <main role="main" class="container">
